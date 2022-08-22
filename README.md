@@ -1,0 +1,3 @@
+# Food Recipes WEB APP
+Simple application for food recipes managment :food: :food: :food: :food:
+Instruction in progress...
