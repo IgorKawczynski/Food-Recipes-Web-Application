@@ -1,3 +1,3 @@
 # Food Recipes WEB APP
-Simple application for food recipes managment :food: :food: :food: :food:
+Simple application for food recipes managment :avocado: :bento: :avocado:
 Instruction in progress...
