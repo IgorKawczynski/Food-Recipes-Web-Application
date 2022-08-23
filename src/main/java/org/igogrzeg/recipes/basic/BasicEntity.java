@@ -2,7 +2,6 @@ package org.igogrzeg.recipes.basic;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @MappedSuperclass

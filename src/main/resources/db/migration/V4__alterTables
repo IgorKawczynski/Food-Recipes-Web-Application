@@ -1,0 +1,1 @@
+UPDATE RECIPES SET cuisine_type = 'FASTFOOD' WHERE cuisine_type = 'FAST FOOD';
