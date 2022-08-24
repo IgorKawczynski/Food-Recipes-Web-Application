@@ -23,7 +23,7 @@ public class UserMapper {
                 .collect(Collectors.toList());
     }
 
-    private String setNickname(EmailValidator email){
+    public String setNickname(EmailValidator email){
         var nickName = email.toString();
         return nickName.substring(0, nickName.indexOf("@")); // cut string before '@' sign
     }

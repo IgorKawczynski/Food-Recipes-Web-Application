@@ -23,17 +23,17 @@ public class IngredientService {
     }
 
     public IngredientResponseDto getIngredientById(Long id){
-        return ingredientMapper.IngredientEntityToIngredientResponseDto(ingredientRepository.findIngredientById(id)
+        return ingredientMapper.ingredientEntityToIngredientResponseDto(ingredientRepository.findIngredientById(id)
                 .orElseThrow(() -> new IngredientNotFoundException(id)));
     }
 
     public List<IngredientResponseDto> getAllIngredients() {
         List<IngredientEntity> ingredients = ingredientRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
-        return ingredientMapper.IngredientEntityListToIngredientResponseDtoList((ingredients));
+        return ingredientMapper.ingredientEntityListToIngredientResponseDtoList((ingredients));
     }
 
     public IngredientResponseDto addIngredient(IngredientEntity ingredient){
-        return ingredientMapper.IngredientEntityToIngredientResponseDto(ingredientRepository.save(ingredient));
+        return ingredientMapper.ingredientEntityToIngredientResponseDto(ingredientRepository.save(ingredient));
     }
 
     public String deleteIngredientById(Long id){
