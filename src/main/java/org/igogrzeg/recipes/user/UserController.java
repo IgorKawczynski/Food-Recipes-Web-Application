@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -20,5 +22,10 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @GetMapping(value = "")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDto> getAllUsers(@RequestParam int pageNumber) {
+        return userService.getAllUsers(pageNumber);
+    }
 
 }
