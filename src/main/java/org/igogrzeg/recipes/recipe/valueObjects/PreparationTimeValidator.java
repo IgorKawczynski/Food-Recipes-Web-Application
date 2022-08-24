@@ -10,9 +10,13 @@ import javax.persistence.Embeddable;
 public class PreparationTimeValidator {
 
     @Column
-    private int preparationTime;
+    private Integer preparationTime;
 
     public PreparationTimeValidator(Integer preparationTime) {
         this.preparationTime = preparationTime;
+    }
+
+    public Integer toInteger() {
+        return preparationTime;
     }
 }

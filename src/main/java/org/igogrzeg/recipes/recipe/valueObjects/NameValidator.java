@@ -15,4 +15,9 @@ public class NameValidator {
     public NameValidator(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

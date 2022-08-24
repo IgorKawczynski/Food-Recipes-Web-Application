@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.igogrzeg.recipes.basic.BasicEntity;
+import org.igogrzeg.recipes.ingredient.IngredientEntity;
 import org.igogrzeg.recipes.recipe.enums.CuisineType;
 import org.igogrzeg.recipes.recipe.enums.Difficulty;
 import org.igogrzeg.recipes.recipe.enums.MealType;
@@ -13,6 +14,7 @@ import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
 import org.igogrzeg.recipes.recipe.valueObjects.PreparationTimeValidator;
 import org.igogrzeg.recipes.user.UserEntity;
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +27,9 @@ public class RecipeEntity extends BasicEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private UserEntity userId;
+
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    private List<IngredientEntity> ingredients;
 
     @Embedded
     private NameValidator name;

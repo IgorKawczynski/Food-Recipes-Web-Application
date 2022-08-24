@@ -18,4 +18,9 @@ public class InformationValidator {
     public InformationValidator(String information) {
         this.information = information;
     }
+
+    @Override
+    public String toString() {
+        return information;
+    }
 }

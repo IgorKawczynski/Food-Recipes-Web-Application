@@ -7,14 +7,13 @@ import org.igogrzeg.recipes.recipe.RecipeEntity;
 import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
 import org.igogrzeg.recipes.user.valueObjects.PasswordValidator;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "USERS")
 public class UserEntity extends BasicEntity {
 
     @Embedded
@@ -22,7 +21,7 @@ public class UserEntity extends BasicEntity {
     @Embedded
     private PasswordValidator password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
     private List<RecipeEntity> recipes;
 
     public void changePassword(String changedPassword){ this.password = new PasswordValidator(changedPassword); }
