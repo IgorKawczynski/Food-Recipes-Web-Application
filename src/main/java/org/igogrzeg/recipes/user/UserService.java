@@ -14,18 +14,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
-    private static final int PAGE_SIZE = 12;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserDto getUserById(Long id) {
-        var user = userRepository.findById(id)
+    public UserEntity getUserEntityById(Long id) {
+        return userRepository.findById(id)
                 .orElseThrow( () -> new NoSuchUserExists(id) );
-        return userMapper.fromUserEntityToUserDto(user);
     }
 
-    public List<UserDto> getAllUsers(Integer pageNumber) {
-        var users = userRepository.findAll(PageRequest.of(pageNumber, PAGE_SIZE, Sort.by("id"))).stream().toList();
+    public UserDto getUserDtoById(Long id) {
+        return userMapper.fromUserEntityToUserDto(getUserEntityById(id));
+    }
+
+    public List<UserDto> getAllUsers() {
+        var users = userRepository.findAll();
         return userMapper.fromUserEntityListToUserDtoList(users);
     }
 

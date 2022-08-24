@@ -19,13 +19,13 @@ public class UserController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserDto getUserById(@PathVariable Long id){
-        return userService.getUserById(id);
+        return userService.getUserDtoById(id);
     }
 
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getAllUsers(@RequestParam int pageNumber) {
-        return userService.getAllUsers(pageNumber);
+        return userService.getAllUsers();
     }
 
 }

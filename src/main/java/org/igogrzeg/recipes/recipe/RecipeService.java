@@ -25,8 +25,13 @@ public class RecipeService {
                 recipeRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
     }
 
-    public RecipeResponseDto getRecipeById(Long id) {
-        return recipeMapper.recipeEntityToRecipeResponseDto(recipeRepository.findRecipeById(id).orElseThrow(() -> new RecipeNotFoundException(id)));
+    public RecipeResponseDto getRecipeResponseDtoById(Long id) {
+        return recipeMapper.recipeEntityToRecipeResponseDto(getRecipeEntityById(id));
+    }
+
+    public RecipeEntity getRecipeEntityById(Long id) {
+        return recipeRepository.findRecipeById(id)
+                .orElseThrow(() -> new RecipeNotFoundException(id));
     }
 
 }

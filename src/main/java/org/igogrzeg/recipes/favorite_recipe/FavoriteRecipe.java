@@ -17,9 +17,14 @@ public class FavoriteRecipe extends BasicEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    private UserEntity userId;
     @ManyToOne
     @JoinColumn(name = "recipe_id", nullable = false)
-    private RecipeEntity recipe;
+    private RecipeEntity recipeId;
+
+    public FavoriteRecipe(UserEntity user, RecipeEntity recipe) {
+        this.userId = user;
+        this.recipeId = recipe;
+    }
 
 }
