@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllUsers(@RequestParam int pageNumber) {
+    public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 

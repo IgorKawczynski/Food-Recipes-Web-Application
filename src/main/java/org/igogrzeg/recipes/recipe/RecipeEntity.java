@@ -2,6 +2,7 @@ package org.igogrzeg.recipes.recipe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.igogrzeg.recipes.basic.BasicEntity;
@@ -17,7 +18,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "RECIPES")
@@ -57,6 +57,23 @@ public class RecipeEntity extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
     private CuisineType cuisineType;
+
+    @Builder
+    public RecipeEntity(UserEntity userId, List<IngredientEntity> ingredients,
+                        NameValidator name, InformationValidator description,
+                        InformationValidator instruction, PreparationTimeValidator preparationTime,
+                        Difficulty difficulty, MealType mealType, CuisineType cuisineType) {
+
+        this.userId = userId;
+        this.ingredients = ingredients;
+        this.name = name;
+        this.description = description;
+        this.instruction = instruction;
+        this.preparationTime = preparationTime;
+        this.difficulty = difficulty;
+        this.mealType = mealType;
+        this.cuisineType = cuisineType;
+    }
 
     public void changeName(String name) {
         this.name = new NameValidator(name);

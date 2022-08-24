@@ -22,7 +22,7 @@ public class EmailValidator implements Validator {
         if ( Objects.isNull(newEmail) ) {
             throw new IllegalStateException("Email can't be null!");
         }
-        if ( isValidLength(newEmail, 5, 80) ) {
+        if ( !isValidLength(newEmail, 5, 80) ) {
             throw new IllegalArgumentException("Email must be between 5 and 80 chars length!");
         }
         if ( !containsValidCharacters(newEmail, EMAIL_PATTERN) ) {

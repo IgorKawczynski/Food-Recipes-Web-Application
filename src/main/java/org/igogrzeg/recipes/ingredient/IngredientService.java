@@ -40,7 +40,7 @@ public class IngredientService {
         ingredientRepository
                 .delete(ingredientRepository.findIngredientById(id)
                         .orElseThrow(() -> new IngredientNotFoundException(id)));
-        return "Ingredient number " + id + "has been successfully deleted";
+        return "Ingredient number " + id + " has been successfully deleted";
     }
 
 

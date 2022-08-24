@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "favorite_recipes")
+@Table(name = "FAVORITE_RECIPES")
 public class FavoriteRecipe extends BasicEntity {
 
     @ManyToOne
