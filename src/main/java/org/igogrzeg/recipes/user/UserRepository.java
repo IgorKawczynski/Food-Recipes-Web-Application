@@ -9,4 +9,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     UserEntity findUserByEmail(EmailValidator emailValidator);
 
+    UserEntity findUserEntityById(Long id);
+
 }

@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.user;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.igogrzeg.recipes.basic.BasicEntity;
@@ -24,6 +25,14 @@ public class UserEntity extends BasicEntity {
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
     private List<RecipeEntity> recipes;
 
+    @Builder
+    public UserEntity(EmailValidator email, PasswordValidator password, List<RecipeEntity> recipes) {
+        this.email = email;
+        this.password = password;
+        this.recipes = recipes;
+    }
+
     public void changePassword(String changedPassword){ this.password = new PasswordValidator(changedPassword); }
+    public void changeEmail(String changedEmail){ this.email = new EmailValidator(changedEmail); }
 
 }
