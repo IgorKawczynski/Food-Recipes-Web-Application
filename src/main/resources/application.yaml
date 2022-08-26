@@ -3,3 +3,9 @@ spring:
     properties:
       hibernate:
         default_schema: public
+
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
