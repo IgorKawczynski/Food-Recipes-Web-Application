@@ -28,7 +28,7 @@ public class RecipeEntity extends BasicEntity {
     @JsonBackReference
     private UserEntity userId;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipeId", fetch = FetchType.LAZY)
     private List<IngredientEntity> ingredients;
 
     @Embedded

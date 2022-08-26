@@ -1,10 +1,13 @@
 package org.igogrzeg.recipes.ingredient;
 
+import org.igogrzeg.recipes.ingredient.dtos.IngredientRequestDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,8 +35,8 @@ public class IngredientController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public IngredientResponseDto addIngredient(@RequestBody IngredientEntity ingredientEntity) {
-        return ingredientService.addIngredient(ingredientEntity);
+    public IngredientEntity addIngredient(@Valid @RequestBody IngredientRequestDto ingredientRequestDto) {
+        return ingredientService.addIngredient(ingredientRequestDto);
     }
 
     @DeleteMapping("/{id}")

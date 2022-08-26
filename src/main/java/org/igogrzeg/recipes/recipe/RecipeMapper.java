@@ -49,6 +49,7 @@ public class RecipeMapper {
     public RecipeRequestDto recipeEntityToRecipeRequestDto (RecipeEntity recipeEntity) {
         return RecipeRequestDto
                 .builder()
+                .userId(recipeEntity.getUserId().getId())
                 .email(recipeEntity.getUserId().getEmail().toString())
                 .name(recipeEntity.getName().toString())
                 .description(recipeEntity.getDescription().toString())

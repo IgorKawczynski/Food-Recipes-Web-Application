@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.ingredient.valueObjects;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,10 @@ public class QuantityValidator {
 
     public QuantityValidator(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
     }
 
     public Integer toInteger() {

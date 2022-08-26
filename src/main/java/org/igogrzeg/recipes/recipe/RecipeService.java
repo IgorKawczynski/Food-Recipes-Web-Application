@@ -36,5 +36,8 @@ public class RecipeService {
                 .orElseThrow(() -> new RecipeNotFoundException(id));
     }
 
+    public RecipeRequestDto addRecipe(RecipeEntity recipeEntity) {
+        return recipeMapper.recipeEntityToRecipeRequestDto(recipeRepository.save(recipeEntity));
+    }
 
 }

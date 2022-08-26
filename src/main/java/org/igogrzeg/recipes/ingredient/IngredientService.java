@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.ingredient;
 
+import org.igogrzeg.recipes.ingredient.dtos.IngredientRequestDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientResponseDto;
 import org.igogrzeg.recipes.ingredient.exceptions.IngredientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,9 @@ public class IngredientService {
         return ingredientMapper.ingredientEntityListToIngredientResponseDtoList((ingredients));
     }
 
-    public IngredientResponseDto addIngredient(IngredientEntity ingredient){
-        return ingredientMapper.ingredientEntityToIngredientResponseDto(ingredientRepository.save(ingredient));
+    public IngredientEntity addIngredient(IngredientRequestDto ingredientRequestDto){
+        IngredientEntity ingredientEntity = ingredientMapper.ingredientRequestDtoToIngredientEntity(ingredientRequestDto);
+        return ingredientRepository.save(ingredientEntity);
     }
 
     public String deleteIngredientById(Long id){

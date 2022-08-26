@@ -31,4 +31,10 @@ public class RecipeController {
         return recipeService.getRecipeResponseDtoById(id);
     }
 
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RecipeRequestDto addRecipe (@RequestBody RecipeEntity recipeEntity) {
+        return recipeService.addRecipe(recipeEntity);
+    }
+
 }
