@@ -3,8 +3,12 @@ package org.igogrzeg.recipes.recipe;
 import org.igogrzeg.recipes.ingredient.IngredientRepository;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
+import org.igogrzeg.recipes.recipe.valueObjects.InformationValidator;
+import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
+import org.igogrzeg.recipes.recipe.valueObjects.PreparationTimeValidator;
 import org.igogrzeg.recipes.user.UserMapper;
 import org.igogrzeg.recipes.user.UserRepository;
+import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,28 +28,26 @@ public class RecipeMapper {
         this.ingredientRepository = ingredientRepository;
     }
 
-    // to user probably
-//    public RecipeEntity recipeRequestDtoToRecipeEntity (RecipeRequestDto recipeRequestDto) {
-//        return RecipeEntity
-//                .builder()
-//                .userId(userRepository.findUserByEmail(new EmailValidator(recipeRequestDto.email())))
-//                .ingredients(ingredientRepository.findAll())
-//                .name(new NameValidator(recipeRequestDto.name()))
-//                .description(new InformationValidator(recipeRequestDto.description()))
-//                .instruction(new InformationValidator(recipeRequestDto.instruction()))
-//                .preparationTime(new PreparationTimeValidator(recipeRequestDto.preparationTime()))
-//                .difficulty(recipeRequestDto.difficulty())
-//                .mealType(recipeRequestDto.mealType())
-//                .cuisineType(recipeRequestDto.cuisineType())
-//                .build();
-//
-//    }
+    public RecipeEntity recipeRequestDtoToRecipeEntity (RecipeRequestDto recipeRequestDto) {
+        return RecipeEntity
+                .builder()
+                .userEntity(userRepository.findUserByEmail(new EmailValidator(recipeRequestDto.email())))
+                .ingredients(recipeRequestDto.ingredients())
+                .name(new NameValidator(recipeRequestDto.name()))
+                .description(new InformationValidator(recipeRequestDto.description()))
+                .instruction(new InformationValidator(recipeRequestDto.instruction()))
+                .preparationTime(new PreparationTimeValidator(recipeRequestDto.preparationTime()))
+                .difficulty(recipeRequestDto.difficulty())
+                .mealType(recipeRequestDto.mealType())
+                .cuisineType(recipeRequestDto.cuisineType())
+                .build();
+    }
 
     public RecipeRequestDto recipeEntityToRecipeRequestDto (RecipeEntity recipeEntity) {
         return RecipeRequestDto
                 .builder()
-                .userId(recipeEntity.getUserEntity().getId())
                 .email(recipeEntity.getUserEntity().getEmail().toString())
+                .ingredients(recipeEntity.getIngredients())
                 .name(recipeEntity.getName().toString())
                 .description(recipeEntity.getDescription().toString())
                 .instruction(recipeEntity.getInstruction().toString())
@@ -54,7 +56,6 @@ public class RecipeMapper {
                 .mealType(recipeEntity.getMealType())
                 .cuisineType(recipeEntity.getCuisineType())
                 .build();
-
     }
 
     public RecipeResponseDto recipeEntityToRecipeResponseDto (RecipeEntity recipeEntity) {

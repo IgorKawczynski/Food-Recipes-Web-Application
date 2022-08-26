@@ -1,7 +1,12 @@
 package org.igogrzeg.recipes.basic;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.Map;
 
+@Getter
+@ToString
 public class ErrorsMapDto {
 
     Map<String, String> errors;
@@ -20,5 +25,4 @@ public class ErrorsMapDto {
     public void add(String errorMessage, String fieldName){
         errors.put(fieldName, errorMessage);
     }
-
 }

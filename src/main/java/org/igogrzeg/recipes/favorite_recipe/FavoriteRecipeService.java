@@ -33,11 +33,11 @@ public class FavoriteRecipeService {
             var favoriteRecipeToBeAdded = new FavoriteRecipeEntity(user, recipe);
             saveRecipeInFavoriteRecipesTable(favoriteRecipeToBeAdded);
         } catch ( NoSuchUserExists exception ) {
-            errorsMapDto.add( new NoSuchUserExists(favoriteRecipe.userId()).getMessage(), "to be implemented" );
+            errorsMapDto.add( new NoSuchUserExists(favoriteRecipe.userId()).getMessage(), "userId" );
         } catch ( RecipeNotFoundException exception ) {
-            errorsMapDto.add( new RecipeNotFoundException(favoriteRecipe.recipeId()).getMessage(), "to be implemented" );
+            errorsMapDto.add( new RecipeNotFoundException(favoriteRecipe.recipeId()).getMessage(), "recipeId" );
         } catch ( RecipeAlreadyInFavoriteRecipesList exception ) {
-            errorsMapDto.add( new RecipeAlreadyInFavoriteRecipesList().getMessage(), "to be implemented");
+            errorsMapDto.add( new RecipeAlreadyInFavoriteRecipesList().getMessage(), "recipeId" );
         }
 
        return errorsMapDto;

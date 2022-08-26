@@ -35,7 +35,7 @@ public class IngredientController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public ErrorsMapDto addIngredient(@Valid @RequestBody IngredientRequestDto ingredientRequestDto) {
+    public ErrorsMapDto addIngredient(@RequestBody IngredientRequestDto ingredientRequestDto) {
         return ingredientService.addIngredient(ingredientRequestDto);
     }
 

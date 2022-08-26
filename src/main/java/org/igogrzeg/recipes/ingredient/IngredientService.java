@@ -39,13 +39,14 @@ public class IngredientService {
     public ErrorsMapDto addIngredient(IngredientRequestDto ingredientRequestDto){
 
         ErrorsMapDto errors = new ErrorsMapDto(new HashMap<String, String>());
-        if(Objects.isNull(ingredientRequestDto.name()))
+
+        if( Objects.isNull(ingredientRequestDto.name()) )
             errors.add("Name cannot be null...", "name");
-        if(!ingredientRequestDto.name().containsValidCharacters(ingredientRequestDto.name().toString(), POLISH_ALPHABET))
+        if( !ingredientRequestDto.name().containsValidCharacters(ingredientRequestDto.name().toString(), POLISH_ALPHABET) )
             errors.add("Name must contain only letters from Polish Alphabet...", "name");
-        if(Objects.isNull(ingredientRequestDto.quantity()))
+        if( Objects.isNull(ingredientRequestDto.quantity()) )
             errors.add("Quantity cannot be null...", "quantity");
-        if(errors.isListOfErrorsEmpty()) {
+        if( errors.isListOfErrorsEmpty() ) {
             IngredientEntity ingredientEntity = ingredientMapper.ingredientRequestDtoToIngredientEntity(ingredientRequestDto);
             ingredientRepository.save(ingredientEntity);
         }

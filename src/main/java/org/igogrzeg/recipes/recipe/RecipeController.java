@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
+import org.igogrzeg.recipes.basic.ErrorsMapDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class RecipeController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public RecipeRequestDto addRecipe (@RequestBody RecipeEntity recipeEntity) {
-        return recipeService.addRecipe(recipeEntity);
+    public ErrorsMapDto addRecipe (@RequestBody RecipeRequestDto recipeRequestDto) {
+        return recipeService.addRecipe(recipeRequestDto);
     }
 
 }
