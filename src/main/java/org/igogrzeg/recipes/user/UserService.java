@@ -20,12 +20,12 @@ public class UserService {
     }
 
     public UserDto getUserDtoById(Long id) {
-        return userMapper.fromUserEntityToUserDto(getUserEntityById(id));
+        return userMapper.userEntityToUserDto(getUserEntityById(id));
     }
 
     public List<UserDto> getAllUsers() {
         var users = userRepository.findAll();
-        return userMapper.fromUserEntityListToUserDtoList(users);
+        return userMapper.userEntityListToUserDtoList(users);
     }
 
 }

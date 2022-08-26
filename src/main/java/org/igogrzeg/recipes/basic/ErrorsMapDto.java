@@ -1,18 +1,15 @@
 package org.igogrzeg.recipes.basic;
 
-import lombok.NoArgsConstructor;
-
-import java.util.List;
 import java.util.Map;
 
-public class ErrorsListDto {
+public class ErrorsMapDto {
 
     Map<String, String> errors;
 
     private String errorMessage; //zawartosc errora wyswietlana dla danego fieldName
     private String fieldName; //nazwy pola pod ktorymi wyswietlane beda errory
 
-    public ErrorsListDto(Map<String, String> errors) {
+    public ErrorsMapDto(Map<String, String> errors) {
         this.errors = errors;
     }
 

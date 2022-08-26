@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
 
-    public UserDto fromUserEntityToUserDto(UserEntity userEntity) {
+    public UserDto userEntityToUserDto(UserEntity userEntity) {
         return UserDto.builder()
                 .nickname(setNickname(userEntity.getEmail()))
                 .email(userEntity.getEmail().toString())
                 .build();
     }
 
-    public List<UserDto> fromUserEntityListToUserDtoList(List<UserEntity> users) {
+    public List<UserDto> userEntityListToUserDtoList(List<UserEntity> users) {
         return users.stream()
-                .map(this::fromUserEntityToUserDto)
+                .map(this::userEntityToUserDto)
                 .collect(Collectors.toList());
     }
 

@@ -1,7 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,7 @@ import org.igogrzeg.recipes.recipe.valueObjects.InformationValidator;
 import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
 import org.igogrzeg.recipes.recipe.valueObjects.PreparationTimeValidator;
 import org.igogrzeg.recipes.user.UserEntity;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -26,9 +26,9 @@ public class RecipeEntity extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
-    private UserEntity userId;
+    private UserEntity userEntity;
 
-    @OneToMany(mappedBy = "recipeId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipeEntity", fetch = FetchType.LAZY)
     private List<IngredientEntity> ingredients;
 
     @Embedded
@@ -59,12 +59,12 @@ public class RecipeEntity extends BasicEntity {
     private CuisineType cuisineType;
 
     @Builder
-    public RecipeEntity(UserEntity userId, List<IngredientEntity> ingredients,
+    public RecipeEntity(UserEntity userEntity, List<IngredientEntity> ingredients,
                         NameValidator name, InformationValidator description,
                         InformationValidator instruction, PreparationTimeValidator preparationTime,
                         Difficulty difficulty, MealType mealType, CuisineType cuisineType) {
 
-        this.userId = userId;
+        this.userEntity = userEntity;
         this.ingredients = ingredients;
         this.name = name;
         this.description = description;

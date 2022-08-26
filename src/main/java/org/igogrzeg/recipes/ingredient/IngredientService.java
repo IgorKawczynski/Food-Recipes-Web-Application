@@ -1,15 +1,16 @@
 package org.igogrzeg.recipes.ingredient;
 
-import org.igogrzeg.recipes.basic.ErrorsListDto;
+import org.igogrzeg.recipes.basic.ErrorsMapDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientRequestDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientResponseDto;
 import org.igogrzeg.recipes.ingredient.exceptions.IngredientNotFoundException;
-import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class IngredientService {
@@ -35,9 +36,9 @@ public class IngredientService {
         return ingredientMapper.ingredientEntityListToIngredientResponseDtoList((ingredients));
     }
 
-    public ErrorsListDto addIngredient(IngredientRequestDto ingredientRequestDto){
+    public ErrorsMapDto addIngredient(IngredientRequestDto ingredientRequestDto){
 
-        ErrorsListDto errors = new ErrorsListDto(new HashMap<String, String>());
+        ErrorsMapDto errors = new ErrorsMapDto(new HashMap<String, String>());
         if(Objects.isNull(ingredientRequestDto.name()))
             errors.add("Name cannot be null...", "name");
         if(!ingredientRequestDto.name().containsValidCharacters(ingredientRequestDto.name().toString(), POLISH_ALPHABET))

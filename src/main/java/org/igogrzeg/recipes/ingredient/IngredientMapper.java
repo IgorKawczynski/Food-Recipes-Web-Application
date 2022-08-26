@@ -36,7 +36,7 @@ public class IngredientMapper {
     public IngredientEntity ingredientRequestDtoToIngredientEntity (IngredientRequestDto ingredientRequestDto) {
         return IngredientEntity
                 .builder()
-                .recipeId(recipeRepository.findRecipeEntityById(ingredientRequestDto.recipeId()))
+                .recipeEntity(recipeRepository.findRecipeEntityById(ingredientRequestDto.recipeId()))
                 .name(ingredientRequestDto.name())
                 .quantity(ingredientRequestDto.quantity())
                 .unit(ingredientRequestDto.unit())

@@ -1,14 +1,10 @@
 package org.igogrzeg.recipes.recipe.valueObjects;
 
-import com.sun.istack.NotNull;
 import lombok.NoArgsConstructor;
 import org.igogrzeg.recipes.interfaces.Validator;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 @Embeddable

@@ -1,10 +1,12 @@
 package org.igogrzeg.recipes.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.igogrzeg.recipes.basic.BasicEntity;
-import org.igogrzeg.recipes.favorite_recipe.FavoriteRecipe;
+import org.igogrzeg.recipes.favorite_recipe.FavoriteRecipeEntity;
 import org.igogrzeg.recipes.recipe.RecipeEntity;
 import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
 import org.igogrzeg.recipes.user.valueObjects.PasswordValidator;
@@ -24,11 +26,13 @@ public class UserEntity extends BasicEntity {
     @Embedded
     private PasswordValidator password;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<RecipeEntity> recipes;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    private List<FavoriteRecipe> favoriteRecipes;
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<FavoriteRecipeEntity> favoriteRecipes;
 
     @Builder
     public UserEntity(EmailValidator email, PasswordValidator password) {

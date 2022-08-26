@@ -1,7 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
-import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
 import org.igogrzeg.recipes.recipe.exceptions.RecipeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +38,11 @@ public class RecipeService {
     public RecipeRequestDto addRecipe(RecipeEntity recipeEntity) {
         return recipeMapper.recipeEntityToRecipeRequestDto(recipeRepository.save(recipeEntity));
     }
+
+    public List<RecipeResponseDto> getRecipeResponseDtosByIds(List<Long> recipeEntitiesIds) {
+        var recipes = recipeRepository.findAllById(recipeEntitiesIds);
+        return recipeMapper.recipeEntityListToRecipeResponseListDto(recipes);
+    }
+
 
 }

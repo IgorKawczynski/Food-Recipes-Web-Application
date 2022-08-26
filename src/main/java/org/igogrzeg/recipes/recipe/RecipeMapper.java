@@ -1,15 +1,10 @@
 package org.igogrzeg.recipes.recipe;
 
-import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.ingredient.IngredientRepository;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
-import org.igogrzeg.recipes.recipe.valueObjects.InformationValidator;
-import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
-import org.igogrzeg.recipes.recipe.valueObjects.PreparationTimeValidator;
 import org.igogrzeg.recipes.user.UserMapper;
 import org.igogrzeg.recipes.user.UserRepository;
-import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,8 +44,8 @@ public class RecipeMapper {
     public RecipeRequestDto recipeEntityToRecipeRequestDto (RecipeEntity recipeEntity) {
         return RecipeRequestDto
                 .builder()
-                .userId(recipeEntity.getUserId().getId())
-                .email(recipeEntity.getUserId().getEmail().toString())
+                .userId(recipeEntity.getUserEntity().getId())
+                .email(recipeEntity.getUserEntity().getEmail().toString())
                 .name(recipeEntity.getName().toString())
                 .description(recipeEntity.getDescription().toString())
                 .instruction(recipeEntity.getInstruction().toString())
@@ -63,7 +58,7 @@ public class RecipeMapper {
     }
 
     public RecipeResponseDto recipeEntityToRecipeResponseDto (RecipeEntity recipeEntity) {
-        String author = userMapper.setNickname(recipeEntity.getUserId().getEmail());
+        String author = userMapper.setNickname(recipeEntity.getUserEntity().getEmail());
         return RecipeResponseDto
                 .builder()
                 .author(author)
@@ -82,4 +77,5 @@ public class RecipeMapper {
     public List<RecipeResponseDto> recipeEntityListToRecipeResponseListDto (List<RecipeEntity> recipeEntityList) {
         return recipeEntityList.stream().map(this::recipeEntityToRecipeResponseDto).collect(Collectors.toList());
     }
+
 }
