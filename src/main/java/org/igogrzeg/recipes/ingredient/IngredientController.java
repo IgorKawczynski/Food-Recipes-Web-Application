@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.ingredient;
 
+import org.igogrzeg.recipes.basic.ErrorsListDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientRequestDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class IngredientController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public IngredientEntity addIngredient(@Valid @RequestBody IngredientRequestDto ingredientRequestDto) {
+    public ErrorsListDto addIngredient(@Valid @RequestBody IngredientRequestDto ingredientRequestDto) {
         return ingredientService.addIngredient(ingredientRequestDto);
     }
 

@@ -15,14 +15,14 @@ import java.util.Objects;
 @NoArgsConstructor
 public class NameValidator implements Validator{
 
-    private static final String POLISH_ALPHABET = "[a-zA-Z-\\p{IsAlphabetic}]+";
+//    private static final String POLISH_ALPHABET = "[a-zA-Z-\\p{IsAlphabetic}]+";
 
     @Column
     private String name;
 
     public NameValidator(String name) {
-//        if(Objects.isNull(name))
-//            throw new IllegalArgumentException("NAME CANNOT BE NULL !!");
+        if(Objects.isNull(name))
+            throw new IllegalArgumentException("NAME CANNOT BE NULL !!");
 //        if(!containsValidCharacters(name, POLISH_ALPHABET))
 //            throw new IllegalStateException("BRAND NAME MAY CONTAIN ONLY LETTERS OR NUMBERS !!");
 //        if(!isValidLength(name, 1, 20))
