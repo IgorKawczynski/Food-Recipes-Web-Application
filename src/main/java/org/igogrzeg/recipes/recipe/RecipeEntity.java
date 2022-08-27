@@ -87,9 +87,7 @@ public class RecipeEntity extends BasicEntity {
         this.instruction = new InformationValidator(instruction);
     }
 
-    public void changePreparationTime(Integer preparationTime) {
-        this.preparationTime = new PreparationTimeValidator(preparationTime);
-    }
+    public void changePreparationTime(Integer preparationTime) { this.preparationTime = new PreparationTimeValidator(preparationTime);}
 
     public void changeDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
@@ -101,5 +99,17 @@ public class RecipeEntity extends BasicEntity {
 
     public void changeCuisineType(CuisineType cuisineType) {
         this.cuisineType = cuisineType;
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeEntity{" +
+                "id=" + id +
+                ", name=" + name +
+                ", preparationTime=" + preparationTime +
+                ", difficulty=" + difficulty +
+                ", mealType=" + mealType +
+                ", cuisineType=" + cuisineType +
+                '}';
     }
 }

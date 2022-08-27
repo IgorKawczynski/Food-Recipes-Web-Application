@@ -1,6 +1,7 @@
 package org.igogrzeg.recipes.favorite_recipe;
 
 import org.igogrzeg.recipes.favorite_recipe.dtos.FavoriteRecipeDto;
+import org.igogrzeg.recipes.favorite_recipe.dtos.RecipeAmountHelper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,5 +22,11 @@ public class FavoriteRecipeMapper {
                 .map(this::favoriteRecipeEntityToFavoriteRecipeRequestDto)
                 .collect(Collectors.toList());
     }
+
+//    public List<RecipeAmountDto> RecipeAmountHelperToRecipeAmountDto(List<RecipeAmountHelper> recipesAndAmount) {
+//        return
+//    }
+
+
 
 }
