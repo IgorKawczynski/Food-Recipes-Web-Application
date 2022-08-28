@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
 import org.igogrzeg.recipes.recipe.exceptions.RecipeNotFoundException;
@@ -10,16 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final RecipeMapper recipeMapper;
-
-    @Autowired
-    public RecipeService (RecipeRepository recipeRepository, RecipeMapper recipeMapper) {
-        this.recipeRepository = recipeRepository;
-        this.recipeMapper = recipeMapper;
-    }
 
     public List<RecipeResponseDto> getAllRecipes() {
         return recipeMapper.recipeEntityListToRecipeResponseListDto(

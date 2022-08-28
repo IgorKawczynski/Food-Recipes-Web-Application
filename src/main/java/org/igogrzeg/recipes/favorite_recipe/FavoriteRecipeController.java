@@ -2,8 +2,8 @@ package org.igogrzeg.recipes.favorite_recipe;
 
 import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
+import org.igogrzeg.recipes.favorite_recipe.dtos.FavoriteRecipeAmountDto;
 import org.igogrzeg.recipes.favorite_recipe.dtos.FavoriteRecipeDto;
-import org.igogrzeg.recipes.favorite_recipe.dtos.RecipeAmountHelper;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/favoriterecipes")
+@RequestMapping("/favorite-recipes")
 public class FavoriteRecipeController {
 
     private final FavoriteRecipeService favoriteRecipeService;
@@ -37,7 +37,7 @@ public class FavoriteRecipeController {
 
     @GetMapping("most-favorite")
     @ResponseStatus(HttpStatus.OK)
-    public List<RecipeAmountHelper> getMostFavoriteRecipes() {
+    public List<FavoriteRecipeAmountDto> getMostFavoriteRecipes() {
         return favoriteRecipeService.getMostFavoriteRecipes();
     }
 

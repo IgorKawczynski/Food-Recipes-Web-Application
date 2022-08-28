@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.ingredient.IngredientRepository;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
@@ -12,17 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class RecipeMapper {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final IngredientRepository ingredientRepository;
-    @Autowired
-    public RecipeMapper(UserMapper userMapper, UserRepository userRepository, IngredientRepository ingredientRepository){
-        this.userMapper = userMapper;
-        this.userRepository = userRepository;
-        this.ingredientRepository = ingredientRepository;
-    }
 
     // to user probably
 //    public RecipeEntity recipeRequestDtoToRecipeEntity (RecipeRequestDto recipeRequestDto) {

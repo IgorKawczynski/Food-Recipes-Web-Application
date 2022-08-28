@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.ingredient;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientRequestDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientResponseDto;
@@ -13,18 +14,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class IngredientService {
 
     private static final String POLISH_ALPHABET = "[a-zA-Z-\\p{IsAlphabetic}]+";
     private final IngredientMapper ingredientMapper;
     private final IngredientRepository ingredientRepository;
-
-    @Autowired
-    public IngredientService (IngredientMapper ingredientMapper,
-                              IngredientRepository ingredientRepository) {
-        this.ingredientMapper = ingredientMapper;
-        this.ingredientRepository = ingredientRepository;
-    }
 
     public IngredientResponseDto getIngredientById(Long id){
         return ingredientMapper.ingredientEntityToIngredientResponseDto(ingredientRepository.findIngredientById(id)
