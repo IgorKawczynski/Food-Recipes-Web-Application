@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
+import org.igogrzeg.recipes.ingredient.IngredientMapper;
 import org.igogrzeg.recipes.ingredient.IngredientRepository;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
@@ -21,18 +22,23 @@ public class RecipeMapper {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final IngredientRepository ingredientRepository;
+    private final IngredientMapper ingredientMapper;
     @Autowired
-    public RecipeMapper(UserMapper userMapper, UserRepository userRepository, IngredientRepository ingredientRepository){
+    public RecipeMapper(UserMapper userMapper,
+                        UserRepository userRepository,
+                        IngredientRepository ingredientRepository,
+                        IngredientMapper ingredientMapper){
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.ingredientRepository = ingredientRepository;
+        this.ingredientMapper = ingredientMapper;
     }
 
     public RecipeEntity recipeRequestDtoToRecipeEntity (RecipeRequestDto recipeRequestDto) {
         return RecipeEntity
                 .builder()
                 .userEntity(userRepository.findUserByEmail(new EmailValidator(recipeRequestDto.email())))
-                .ingredients(recipeRequestDto.ingredients())
+                .ingredients(ingredientMapper.ingredientRequestDtoListToIngredientEntityList(recipeRequestDto.ingredient()))
                 .name(new NameValidator(recipeRequestDto.name()))
                 .description(new InformationValidator(recipeRequestDto.description()))
                 .instruction(new InformationValidator(recipeRequestDto.instruction()))
@@ -47,7 +53,7 @@ public class RecipeMapper {
         return RecipeRequestDto
                 .builder()
                 .email(recipeEntity.getUserEntity().getEmail().toString())
-                .ingredients(recipeEntity.getIngredients())
+                .ingredient(ingredientMapper.ingredientEntityListToIngredientRequestDtoList(recipeEntity.getIngredients()))
                 .name(recipeEntity.getName().toString())
                 .description(recipeEntity.getDescription().toString())
                 .instruction(recipeEntity.getInstruction().toString())

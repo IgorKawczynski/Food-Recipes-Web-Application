@@ -39,6 +39,12 @@ public class IngredientController {
         return ingredientService.addIngredient(ingredientRequestDto);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ErrorsMapDto changeIngredientById(@PathVariable Long id, @RequestBody IngredientRequestDto ingredientRequestDto) {
+        return ingredientService.changeIngredientById(id, ingredientRequestDto);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String deleteIngredientById(@PathVariable Long id) {
