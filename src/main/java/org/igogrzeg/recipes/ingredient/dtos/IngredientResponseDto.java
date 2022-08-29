@@ -8,9 +8,7 @@ import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
 public record IngredientResponseDto(
 
         String name,
-
         Integer quantity,
-
         Unit unit
         ) {
 

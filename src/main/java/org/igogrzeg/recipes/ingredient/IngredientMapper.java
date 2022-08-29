@@ -16,8 +16,7 @@ import java.util.stream.Collectors;
 public class IngredientMapper {
 
     private final RecipeRepository recipeRepository;
-
-
+    
     public IngredientRequestDto ingredientEntityToIngredientRequestDto(IngredientEntity ingredient) {
         return IngredientRequestDto
                 .builder()

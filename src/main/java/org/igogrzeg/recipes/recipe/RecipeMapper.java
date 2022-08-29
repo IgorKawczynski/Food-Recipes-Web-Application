@@ -1,7 +1,7 @@
 package org.igogrzeg.recipes.recipe;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.ingredient.IngredientMapper;
-import org.igogrzeg.recipes.ingredient.IngredientRepository;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
 import org.igogrzeg.recipes.recipe.valueObjects.InformationValidator;
@@ -10,29 +10,19 @@ import org.igogrzeg.recipes.recipe.valueObjects.PreparationTimeValidator;
 import org.igogrzeg.recipes.user.UserMapper;
 import org.igogrzeg.recipes.user.UserRepository;
 import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class RecipeMapper {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
-    private final IngredientRepository ingredientRepository;
     private final IngredientMapper ingredientMapper;
-    @Autowired
-    public RecipeMapper(UserMapper userMapper,
-                        UserRepository userRepository,
-                        IngredientRepository ingredientRepository,
-                        IngredientMapper ingredientMapper){
-        this.userMapper = userMapper;
-        this.userRepository = userRepository;
-        this.ingredientRepository = ingredientRepository;
-        this.ingredientMapper = ingredientMapper;
-    }
+
 
     public RecipeEntity recipeRequestDtoToRecipeEntity (RecipeRequestDto recipeRequestDto) {
         return RecipeEntity

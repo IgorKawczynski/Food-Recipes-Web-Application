@@ -6,4 +6,7 @@ public class NoSuchUserExists extends RuntimeException {
         super("User with id: " + id + " doesn't exists!");
     }
 
+    public NoSuchUserExists(String email){
+        super("User with email: " + email + " doesn't exists!");
+    }
 }

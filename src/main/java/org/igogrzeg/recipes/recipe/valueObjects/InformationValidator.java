@@ -9,8 +9,6 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 public class InformationValidator {
 
-    private static final String POLISH_ALPHABET = "[a-zA-Z-\\p{IsAlphabetic}]+";
-
     @Column
     private String information;
 

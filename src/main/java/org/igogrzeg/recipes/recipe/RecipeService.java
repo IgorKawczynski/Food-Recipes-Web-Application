@@ -1,40 +1,29 @@
 package org.igogrzeg.recipes.recipe;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
-import org.igogrzeg.recipes.ingredient.IngredientEntity;
 import org.igogrzeg.recipes.interfaces.Validator;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
 import org.igogrzeg.recipes.recipe.exceptions.RecipeNotFoundException;
-import org.igogrzeg.recipes.user.UserEntity;
-import org.igogrzeg.recipes.user.UserRepository;
-import org.igogrzeg.recipes.user.UserService;
-import org.igogrzeg.recipes.user.exceptions.NoSuchUserExists;
-import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class RecipeService implements Validator {
 
     private final RecipeRepository recipeRepository;
     private final RecipeMapper recipeMapper;
-    private final UserRepository userRepository;
 
 
-    @Autowired
-    public RecipeService (RecipeRepository recipeRepository,
-                          RecipeMapper recipeMapper,
-                          UserRepository userRepository) {
+    public RecipeEntity getRecipeEntityById(Long id) {
 
-        this.recipeRepository = recipeRepository;
-        this.recipeMapper = recipeMapper;
-        this.userRepository = userRepository;
+        return recipeRepository.findRecipeById(id)
+                .orElseThrow(() -> new RecipeNotFoundException(id));
     }
 
     public List<RecipeResponseDto> getAllRecipes() {
@@ -48,10 +37,10 @@ public class RecipeService implements Validator {
         return recipeMapper.recipeEntityToRecipeResponseDto(getRecipeEntityById(id));
     }
 
-    public RecipeEntity getRecipeEntityById(Long id) {
+    public List<RecipeResponseDto> getRecipeResponseDtosByIds(List<Long> recipeEntitiesIds) {
 
-        return recipeRepository.findRecipeById(id)
-                .orElseThrow(() -> new RecipeNotFoundException(id));
+        var recipes = recipeRepository.findAllById(recipeEntitiesIds);
+        return recipeMapper.recipeEntityListToRecipeResponseListDto(recipes);
     }
 
     public ErrorsMapDto addRecipe(RecipeRequestDto recipeRequestDto) {
@@ -82,11 +71,23 @@ public class RecipeService implements Validator {
         return errors;
     }
 
-    public List<RecipeResponseDto> getRecipeResponseDtosByIds(List<Long> recipeEntitiesIds) {
+    //TO CHANGE
+    public ErrorsMapDto changeRecipeById(Long id, RecipeRequestDto recipeRequestDto) {
 
-        var recipes = recipeRepository.findAllById(recipeEntitiesIds);
-        return recipeMapper.recipeEntityListToRecipeResponseListDto(recipes);
+        ErrorsMapDto errors = new ErrorsMapDto(new HashMap<String, String>());
+        try {
+            RecipeEntity recipeEntity = getRecipeEntityById(id);
+            recipeEntity.changeName(recipeRequestDto.name());
+            recipeEntity.changeDescription(recipeRequestDto.description());
+            recipeEntity.changeInstruction(recipeRequestDto.instruction());
+            recipeEntity.changePreparationTime(recipeRequestDto.preparationTime());
+            recipeEntity.changeDifficulty(recipeRequestDto.difficulty());
+            recipeEntity.changeMealType(recipeRequestDto.mealType());
+            recipeEntity.changeCuisineType(recipeRequestDto.cuisineType());
+        }
+        catch (RecipeNotFoundException exception) {
+            errors.add(new RecipeNotFoundException(id).getMessage(), "id");
+        }
+        return errors;
     }
-
-
 }
