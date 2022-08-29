@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.recipe;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
@@ -10,15 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/recipes")
 public class RecipeController {
 
     private final RecipeService recipeService;
-
-    @Autowired
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)

@@ -1,9 +1,11 @@
 package org.igogrzeg.recipes.recipe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.igogrzeg.recipes.basic.BasicEntity;
 import org.igogrzeg.recipes.ingredient.IngredientEntity;
 import org.igogrzeg.recipes.recipe.enums.CuisineType;
@@ -15,6 +17,7 @@ import org.igogrzeg.recipes.recipe.valueObjects.PreparationTimeValidator;
 import org.igogrzeg.recipes.user.UserEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @NoArgsConstructor
@@ -87,9 +90,7 @@ public class RecipeEntity extends BasicEntity {
         this.instruction = new InformationValidator(instruction);
     }
 
-    public void changePreparationTime(Integer preparationTime) {
-        this.preparationTime = new PreparationTimeValidator(preparationTime);
-    }
+    public void changePreparationTime(Integer preparationTime) { this.preparationTime = new PreparationTimeValidator(preparationTime);}
 
     public void changeDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
@@ -102,4 +103,17 @@ public class RecipeEntity extends BasicEntity {
     public void changeCuisineType(CuisineType cuisineType) {
         this.cuisineType = cuisineType;
     }
+
+    @Override
+    public String toString() {
+        return "RecipeEntity{" +
+                "id=" + id +
+                ", name=" + name +
+                ", preparationTime=" + preparationTime +
+                ", difficulty=" + difficulty +
+                ", mealType=" + mealType +
+                ", cuisineType=" + cuisineType +
+                '}';
+    }
+
 }

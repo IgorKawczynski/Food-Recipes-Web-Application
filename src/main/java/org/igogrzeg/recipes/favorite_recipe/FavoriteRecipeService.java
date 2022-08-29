@@ -2,6 +2,7 @@ package org.igogrzeg.recipes.favorite_recipe;
 
 import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
+import org.igogrzeg.recipes.favorite_recipe.dtos.FavoriteRecipeAmountDto;
 import org.igogrzeg.recipes.favorite_recipe.dtos.FavoriteRecipeDto;
 import org.igogrzeg.recipes.favorite_recipe.exceptions.RecipeAlreadyInFavoriteRecipesList;
 import org.igogrzeg.recipes.recipe.RecipeService;
@@ -67,8 +68,13 @@ public class FavoriteRecipeService {
                 .collect(Collectors.toList());
     }
 
+    public List<FavoriteRecipeAmountDto> getMostFavoriteRecipes() {
+        var mostFavoriteRecipesLists = favoriteRecipeRepository.getMostFavoriteRecipesLists();
+        return favoriteRecipeMapper.favoriteRecipeAmountHelperListToFavoriteRecipeAmountDtoList(mostFavoriteRecipesLists);
+    }
+
     public List<FavoriteRecipeDto> getAll() {
-        List<FavoriteRecipeEntity> favoriteRecipes = favoriteRecipeRepository.findAll();
+        var favoriteRecipes = favoriteRecipeRepository.findAll();
         return favoriteRecipeMapper.favoriteRecipeEntitiesToFavoriteRecipeRequestDtoList(favoriteRecipes);
     }
 

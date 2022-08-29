@@ -1,6 +1,7 @@
 package org.igogrzeg.recipes.ingredient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import org.igogrzeg.recipes.recipe.RecipeEntity;
 import org.igogrzeg.recipes.recipe.valueObjects.NameValidator;
 
 import javax.persistence.*;
+
 
 @Entity
 @NoArgsConstructor

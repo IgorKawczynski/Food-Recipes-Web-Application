@@ -1,10 +1,8 @@
 package org.igogrzeg.recipes.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.*;
 import org.igogrzeg.recipes.basic.BasicEntity;
 import org.igogrzeg.recipes.favorite_recipe.FavoriteRecipeEntity;
 import org.igogrzeg.recipes.recipe.RecipeEntity;

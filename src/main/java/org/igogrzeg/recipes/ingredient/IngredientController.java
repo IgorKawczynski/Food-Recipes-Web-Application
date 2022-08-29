@@ -1,5 +1,6 @@
 package org.igogrzeg.recipes.ingredient;
 
+import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientRequestDto;
 import org.igogrzeg.recipes.ingredient.dtos.IngredientResponseDto;
@@ -11,15 +12,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/ingredients")
 public class IngredientController {
 
     private final IngredientService ingredientService;
-
-    @Autowired
-    public IngredientController(IngredientService ingredientService){
-        this.ingredientService = ingredientService;
-    }
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
