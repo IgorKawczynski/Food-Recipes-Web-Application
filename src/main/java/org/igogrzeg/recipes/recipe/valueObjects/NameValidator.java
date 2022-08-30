@@ -23,7 +23,7 @@ public class NameValidator implements Validator{
             throw new IllegalStateException("NAME MAY CONTAIN ONLY LETTERS OR NUMBERS !!");
         if( !isValidLength(name, 1, 36) )
             throw new IllegalStateException("NAME MUST BE BETWEEN 1 AND 36 CHARACTERS !!");
-        this.name = name;
+        this.name = "TOP " + name;
     }
 
     @Override
