@@ -1,11 +1,13 @@
 package org.igogrzeg.recipes.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.igogrzeg.recipes.basic.BasicEntity;
 import org.igogrzeg.recipes.favorite_recipe.FavoriteRecipeEntity;
 import org.igogrzeg.recipes.recipe.RecipeEntity;
+import org.igogrzeg.recipes.user.dtos.UserRegistrationDto;
 import org.igogrzeg.recipes.user.valueObjects.EmailValidator;
 import org.igogrzeg.recipes.user.valueObjects.PasswordValidator;
 
@@ -36,6 +38,11 @@ public class UserEntity extends BasicEntity {
     public UserEntity(EmailValidator email, PasswordValidator password) {
         this.email = email;
         this.password = password;
+    }
+
+    public UserEntity(UserRegistrationDto userDto){
+        this.email = new EmailValidator(userDto.email());
+        this.password = new PasswordValidator(userDto.password());
     }
 
     public void changePassword(String changedPassword){ this.password = new PasswordValidator(changedPassword); }

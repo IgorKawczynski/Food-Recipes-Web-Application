@@ -11,8 +11,6 @@ import java.util.Objects;
 @NoArgsConstructor
 public class NameValidator implements Validator{
 
-    private static final String POLISH_ALPHABET = "[a-zA-Z-\\p{IsAlphabetic}]+";
-
     @Column
     private String name;
 

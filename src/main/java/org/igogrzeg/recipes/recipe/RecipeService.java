@@ -2,9 +2,13 @@ package org.igogrzeg.recipes.recipe;
 
 import lombok.RequiredArgsConstructor;
 import org.igogrzeg.recipes.basic.ErrorsMapDto;
+import org.igogrzeg.recipes.basic.exceptions.NullValueException;
+import org.igogrzeg.recipes.basic.exceptions.InValidCharactersException;
+import org.igogrzeg.recipes.basic.exceptions.PolishSignsException;
 import org.igogrzeg.recipes.interfaces.Validator;
 import org.igogrzeg.recipes.recipe.dtos.RecipeRequestDto;
 import org.igogrzeg.recipes.recipe.dtos.RecipeResponseDto;
+import org.igogrzeg.recipes.recipe.exceptions.PreparationTimeException;
 import org.igogrzeg.recipes.recipe.exceptions.RecipeNotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -45,27 +49,27 @@ public class RecipeService implements Validator {
 
     public ErrorsMapDto addRecipe(RecipeRequestDto recipeRequestDto) {
 
-        ErrorsMapDto errors = new ErrorsMapDto(new HashMap<String, String>());
+        ErrorsMapDto errors = new ErrorsMapDto(new HashMap<>());
 
         if( Objects.isNull(recipeRequestDto.email()) )
-            errors.add("Email cannot be null...", "email");
+            errors.add("email", new NullValueException("Email"));
 
-        if( Objects.isNull(recipeRequestDto.name()) )
-            errors.add("Email cannot be null...", "email");
+        if( Objects.isNull(recipeRequestDto.recipeName()) )
+            errors.add("recipeName", new NullValueException("Recipe name"));
 
-        if( !containsPolishCharacters(recipeRequestDto.name()) )
-            errors.add("Name must contain only Polish characters... ", "email");
+        if( !containsPolishCharacters(recipeRequestDto.recipeName()) )
+            errors.add("recipeName", new PolishSignsException("Recipe name"));
 
         if( !containsValidCharacters(recipeRequestDto.description(), ENGLISH_LETTERS_NUMBERS_SPECIAL_CHARACTERS) )
-            errors.add("Description must contain only letters, numbers and special characters... ", "description");
+            errors.add("description", new InValidCharactersException("Description"));
 
         if( !containsValidCharacters(recipeRequestDto.instruction(), ENGLISH_LETTERS_NUMBERS_SPECIAL_CHARACTERS) )
-            errors.add("Instruction must contain only letters, numbers and special characters... ", "instruction");
+            errors.add("instruction", new InValidCharactersException("Instruction"));
 
         if( !isValidNumber(recipeRequestDto.preparationTime(), 5, 300) )
-            errors.add("Preparation time must be between 5 and 300 minutes...", "preparationTime");
+            errors.add("preparationTime", new PreparationTimeException());
 
-        if(errors.isListOfErrorsEmpty())
+        if( errors.isEmpty() )
             recipeRepository.save(recipeMapper.recipeRequestDtoToRecipeEntity(recipeRequestDto));
 
         return errors;
@@ -74,10 +78,10 @@ public class RecipeService implements Validator {
     //TO CHANGE
     public ErrorsMapDto changeRecipeById(Long id, RecipeRequestDto recipeRequestDto) {
 
-        ErrorsMapDto errors = new ErrorsMapDto(new HashMap<String, String>());
+        ErrorsMapDto errors = new ErrorsMapDto(new HashMap<>());
         try {
             RecipeEntity recipeEntity = getRecipeEntityById(id);
-            recipeEntity.changeName(recipeRequestDto.name());
+            recipeEntity.changeName(recipeRequestDto.recipeName());
             recipeEntity.changeDescription(recipeRequestDto.description());
             recipeEntity.changeInstruction(recipeRequestDto.instruction());
             recipeEntity.changePreparationTime(recipeRequestDto.preparationTime());
@@ -86,7 +90,7 @@ public class RecipeService implements Validator {
             recipeEntity.changeCuisineType(recipeRequestDto.cuisineType());
         }
         catch (RecipeNotFoundException exception) {
-            errors.add(new RecipeNotFoundException(id).getMessage(), "id");
+            errors.add("", new RecipeNotFoundException(id));
         }
         return errors;
     }

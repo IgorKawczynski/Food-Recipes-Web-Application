@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public record RecipeRequestDto(String email, List<IngredientRequestDto> ingredient,
-                               String name, String description,
+                               String recipeName, String description,
                                String instruction, Integer preparationTime,
                                Difficulty difficulty, MealType mealType,
                                CuisineType cuisineType) {

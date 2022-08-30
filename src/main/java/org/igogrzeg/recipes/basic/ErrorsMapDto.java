@@ -1,28 +1,32 @@
 package org.igogrzeg.recipes.basic;
 
-import lombok.Getter;
-import lombok.ToString;
-
+import java.util.HashMap;
 import java.util.Map;
 
-@Getter
-@ToString
 public class ErrorsMapDto {
 
-    Map<String, String> errors;
+    Map<String, Exception> errors;
 
-    private String errorMessage; //zawartosc errora wyswietlana dla danego fieldName
-    private String fieldName; //nazwy pola pod ktorymi wyswietlane beda errory
-
-    public ErrorsMapDto(Map<String, String> errors) {
+    public ErrorsMapDto(Map<String, Exception> errors) {
         this.errors = errors;
     }
 
-    public boolean isListOfErrorsEmpty(){
-        return this.errors.size()==0;
+    public boolean isEmpty(){
+        return errors.isEmpty();
     }
 
-    public void add(String errorMessage, String fieldName){
-        errors.put(fieldName, errorMessage);
+    public void add(String fieldName, Exception exception){
+        errors.put(fieldName, exception);
     }
+
+    public Map<String, String> getErrors() {
+        var fieldNameAndExceptionMessageMap = new HashMap<String, String>();
+        this.errors.forEach((fieldName, exception) -> {
+            fieldNameAndExceptionMessageMap.put(fieldName, exception.getMessage());
+        });
+        return fieldNameAndExceptionMessageMap;
+    }
+
 }
+
+
