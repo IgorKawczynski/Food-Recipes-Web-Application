@@ -37,13 +37,13 @@ public class UserService {
 
     public ErrorsMapDto changeUserByEmail(String email, UserDto changedUser) {
 
-        ErrorsMapDto errors = new ErrorsMapDto( new HashMap<String, String>());
+        ErrorsMapDto errors = new ErrorsMapDto( new HashMap<>());
         try{
             UserEntity userEntity = getUserEntityByEmail(email);
             userEntity.changeEmail(email);
         }
         catch(NoSuchUserExists exception) {
-            errors.add(new NoSuchUserExists(email).getMessage(), "email");
+            errors.add("email", new NoSuchUserExists(email));
         }
         return errors;
     }
