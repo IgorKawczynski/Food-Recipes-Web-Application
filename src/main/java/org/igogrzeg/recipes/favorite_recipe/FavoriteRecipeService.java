@@ -26,7 +26,7 @@ public class FavoriteRecipeService {
     private final UserService userService;
 
     public ErrorsMapDto addRecipeToFavoriteList(FavoriteRecipeDto favoriteRecipe) {
-        var errorsMapDto = new ErrorsMapDto(new HashMap<String, String>());
+        var errorsMapDto = new ErrorsMapDto(new HashMap<>());
 
         try {
             var user = userService.getUserEntityById(favoriteRecipe.userId());
@@ -34,11 +34,11 @@ public class FavoriteRecipeService {
             var favoriteRecipeToBeAdded = new FavoriteRecipeEntity(user, recipe);
             saveRecipeInFavoriteRecipesTable(favoriteRecipeToBeAdded);
         } catch ( NoSuchUserExists exception ) {
-            errorsMapDto.add( new NoSuchUserExists(favoriteRecipe.userId()).getMessage(), "userId" );
+            errorsMapDto.add( "hgw gdzie", new NoSuchUserExists(favoriteRecipe.userId()) );
         } catch ( RecipeNotFoundException exception ) {
-            errorsMapDto.add( new RecipeNotFoundException(favoriteRecipe.recipeId()).getMessage(), "recipeId" );
+            errorsMapDto.add( "hgw gdzie", new RecipeNotFoundException(favoriteRecipe.recipeId()) );
         } catch ( RecipeAlreadyInFavoriteRecipesList exception ) {
-            errorsMapDto.add( new RecipeAlreadyInFavoriteRecipesList().getMessage(), "recipeId" );
+            errorsMapDto.add( "hgw gdzie", new RecipeAlreadyInFavoriteRecipesList());
         }
 
        return errorsMapDto;
